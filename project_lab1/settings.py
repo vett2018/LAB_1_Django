@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'common_lab_1',
     'login_app',
+    'new_common',
+    'cart',
 ]
 
 MIDDLEWARE = [
