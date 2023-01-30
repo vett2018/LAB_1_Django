@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import os
 
 #Load os environments from .env file
-load_dotenv() #Загрузка ОС окружающей среды
+load_dotenv() #Загрузка ОС окружающей среды из файла .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
