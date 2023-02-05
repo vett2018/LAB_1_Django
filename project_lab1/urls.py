@@ -23,6 +23,9 @@ urlpatterns = [
     path('other/', include('apps.new_common.urls')),
     path('other/', include('apps.login_app.urls')),
     path('other/cart/', include('apps.cart.urls')),
-    path('', include('apps.home.urls')),
-
+    #path('', include('apps.home.urls')),
+    #path('cart/', include('apps.cart_shop.urls')),
+    #path('checkout/', include('apps.checkout.urls')),
+    path('', include('apps.blog.urls')),
+    #path('shop/', include('apps.shop.urls')),
 ]
