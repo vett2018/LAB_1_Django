@@ -12,6 +12,12 @@ class IndexShopView(View):
    def get(self, request):
        return render(request, 'home/index.html')
 
+   def get(self, request):
+       return render(request, 'home/contact.html')
+
+   def get(self, request):
+       return render(request, 'home/about.html')
+
 
 
 
