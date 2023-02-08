@@ -224,17 +224,19 @@
     	</div>
     	<div class="container">
     		<div class="row">
+				{% for product in data %}
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static 'shop/images/product-1.jpg' %}" alt="Colorlib Template">
-    						<span class="status">30%</span>
+						<a href="#" class="img-prod"><img class="img-fluid" src="{% static product.url %}" alt="Colorlib Template">
+    						<span class="status">{{product.discount}}</span>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Bell Pepper</a></h3>
+    						<h3><a href="#">{{product.name}}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+		    						<p class="price"><span class="mr-2 price-dc"> {{product.price_before}}</span><span class="price-sale">{{product.price_after}}</span></p>
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
@@ -253,6 +255,7 @@
     					</div>
     				</div>
     			</div>
+				{% endfor %}
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static 'shop/images/product-2.jpg' %}" alt="Colorlib Template">
@@ -342,7 +345,7 @@
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static 'shop/images/product-5.jpg' %}" alt="Colorlib Template">
-    						<span class="status">30%</span>
+    						<span class="status">30%\</span>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
