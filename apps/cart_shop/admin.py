@@ -1,3 +1,6 @@
+#добавление модели в админку
 from django.contrib import admin
+from .models import CartItemShop, Product
 
-# Register your models here.
+admin.site.register(CartItemShop)
+admin.site.register(Product)

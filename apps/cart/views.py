@@ -22,5 +22,4 @@ def remove_item(request, item_id):
 
 
 def checkout(request):
-   # code to handle checkout process
    return redirect('cart:view_cart')
