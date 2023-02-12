@@ -74,7 +74,7 @@
 	          <li class="nav-item"><a href="{% url 'home:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="{% url 'home:contact' %}" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[{{cart_items|length}}]</a></li> <!-- КОЛ-ВО ТОВАРОВ В КОРЗИНЕ-->
 
 	        </ul>
 	      </div>
@@ -110,28 +110,29 @@
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-3.jpg' %});"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$4.90</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$4.90</td>
-						      </tr><!-- END TR-->
+							{% for item in cart_items %}
+								<tr class="text-center">
+								  <td class="product-remove"><a href="{% url 'cart_shop:del_from_cart' item.id %}"><span class="ion-ios-close"></span></a></td>
 
-						      <tr class="text-center">
+								  <td class="image-prod"><div class="img" style="background-image:url({{item.product.image.url}});"></div></td>
+
+								  <td class="product-name">
+									  <h3>{{item.product.name}}</h3>
+									  <p>{{item.product.description}}</p>
+								  </td>
+
+								  <td class="price">${{item.product.price}}</td>
+
+								  <td class="quantity">
+									  <div class="input-group mb-3">
+										  <input type="text" name="quantity" class="quantity form-control input-number" value={{item.quantity}} min="1" max="100">
+									  </div>
+								   </td>
+
+								  <td class="total">${% widthratio item.product.price 1 item.quantity %}</td>
+								</tr><!-- END TR-->
+							{%endfor%}
+						     <!--Не нужный блок <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-4.jpg' %});"></div></td>
@@ -150,15 +151,38 @@
 					          </td>
 						        
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR--> <!-- Повторяющийся блог -->
 						    </tbody>
 						  </table>
 					  </div>
     			</div>
     		</div>
     		<div class="row justify-content-end">
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate"> <!-- !!! -->
     				<div class="cart-total mb-3">
+					  <h3>Cart Totals</h3>
+					  <p class="d-flex">
+						 <span>Subtotal</span>
+						 <span>${{total_price_no_discount}}</span>
+					  </p>
+					  <p class="d-flex">
+						 <span>Delivery</span>
+						 <span>$0.00</span>
+					  </p>
+					  <p class="d-flex">
+						 <span>Discount</span>
+						 <span>${{total_discount}}</span>
+					  </p>
+					  <hr>
+					  <p class="d-flex total-price">
+						 <span>Total</span>
+						 <span>${{total_sum}}</span>
+					  </p>
+					</div>
+					<p><a href="{% url 'checkout:checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+				</div>
+				<!--
+					<div class="cart-total mb-3">
     					<h3>Coupon Code</h3>
     					<p>Enter your coupon code if you have one</p>
   						<form action="#" class="info">
@@ -168,8 +192,10 @@
 	              </div>
 	            </form>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+    				<p><a href="{% url 'checkout:checkout' %}" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
     			</div>
+-->
+				<!-- Повторяющиеся БЛОГ
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Estimate shipping and tax</h3>
@@ -213,9 +239,9 @@
     					</p>
     				</div>
     				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
+    			</div> -->
     		</div>
-			</div>
+			</div> -->
 		</section>
 
 		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
