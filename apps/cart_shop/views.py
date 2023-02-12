@@ -32,7 +32,7 @@ class ViewCartWishlist(View):
     def get(self, request):
         return render(request, 'cart_shop/wishlist.html')
 
-class ViewCartBuy(View): # Представление для обработки добавления в БД и перехода на корзину
+class ViewCartBuy(View): # ПРЕДСТАВЛЕНИЕ ДЛЯ ОБРАБОТКИ ДОБАВЛЕНИЯ В БД И ПЕРЕДА НА КОРЗИНУ
 
    def get(self, request, product_id):
        product = get_object_or_404(Product, id=product_id)
@@ -55,7 +55,7 @@ def save_product_in_cart(request, product_id):
    cart_item = CartItemShop(cart=cart_user, product=product)
    cart_item.save()
 
-def save_product_in_cart(request, product_id): #поиска продуктов по полям
+def save_product_in_cart(request, product_id): #ПОИСК ПРОДУКТОВ ПО ПОЛЯМ
    cart_items = CartItemShop.objects.filter(cart__user=request.user,
                                             product__id=product_id)
    if cart_items:
