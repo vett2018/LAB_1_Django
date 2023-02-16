@@ -32,6 +32,14 @@ class ViewCartWishlist(View):
     def get(self, request):
         return render(request, 'cart_shop/wishlist.html')
 
+""" ПРОВЕРКА НА АФТОРИЗАЦИЮ
+class ViewCartWishlist(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return render(request, 'cart_shop/wishlist.html')
+        return redirect('auth_shop:login')
+"""
+
 class ViewCartBuy(View): # ПРЕДСТАВЛЕНИЕ ДЛЯ ОБРАБОТКИ ДОБАВЛЕНИЯ В БД И ПЕРЕДА НА КОРЗИНУ
 
    def get(self, request, product_id):
