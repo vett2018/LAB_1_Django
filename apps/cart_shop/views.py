@@ -13,11 +13,11 @@ class ViewCart(View):
                                          for item in data)
            total_discount = sum(item.product.price * item.product.discount * item.quantity
                                 for item in data if item.product.discount is not None)/100
-           total_sum = total_price_no_discount - total_discount
+          # total_sum = total_price_no_discount - total_discount #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
            context = {'cart_items': data,
                       'total_price_no_discount': total_price_no_discount,
                       'total_discount': total_discount,
-                      'total_sum': total_sum,
+                      #'total_sum': total_sum, #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
                       }
            return render(request, 'cart_shop/cart.html', context)
        return redirect('auth_shop:login')
