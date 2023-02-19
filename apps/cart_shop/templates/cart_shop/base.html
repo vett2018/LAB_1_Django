@@ -1,4 +1,4 @@
-{% load static %}
+    {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,7 +74,7 @@
 	          <li class="nav-item"><a href="{% url 'home:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="{% url 'home:contact' %}" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span></a></li> <!-- ОТОБРОЖЕНИЕ КОЛ-ВА ТОВАРОВ В КОРЗИНЕ-->
+	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
 
 	        </ul>
 	      </div>
@@ -85,7 +85,7 @@
 
         {% endblock %}
 
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light"> <!-- [!] -->
+		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light"> <!-- НАЧАЛО-->
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6">
@@ -199,6 +199,43 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static 'shop/js/google-map.js' %}"></script>
   <script src="{% static 'shop/js/main.js' %}"></script>
+
+  <script>
+		$(document).ready(function(){
+
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            $('#quantity').val(quantity + 1);
+
+
+		            // Increment
+
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+
+		});
+	</script>
 
   </body>
 </html>

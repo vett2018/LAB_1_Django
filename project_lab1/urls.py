@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.cart_shop.views import ViewCartWishlist
+from apps.cart_shop.views import ViewWishlist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,10 +24,11 @@ urlpatterns = [
     path('other/', include('apps.login_app.urls')),
     path('other/cart/', include('apps.cart.urls')),
     path('', include('apps.home.urls')),
-    path('wishlist/', ViewCartWishlist.as_view()),
+    #path('wishlist/', ViewWishlist.as_view()),
     path('cart/', include('apps.cart_shop.urls')),
     path('checkout/', include('apps.checkout.urls')),
     path('blog/', include('apps.blog.urls')),
     path('shop/', include('apps.shop.urls')),
     path('login/', include('apps.auth_shop.urls')),
+
 ]

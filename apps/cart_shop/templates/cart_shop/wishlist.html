@@ -1,3 +1,9 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!--
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -74,13 +80,13 @@
 	          <li class="nav-item"><a href="{% url 'home:about' %}" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="{% url 'home:contact' %}" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="{% url 'cart_shop:cart' %}" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
 
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
-    <!-- END nav -->
+     END nav -->
 
     <div class="hero-wrap hero-bread" style="background-image: url({% static 'shop/images/bg_1.jpg' %});">
       <div class="container">
@@ -110,131 +116,133 @@
 						      </tr>
 						    </thead>
 						    <tbody>
+							{% for item in cart_items_wishlist %} <!-- ОБЕРТКА-->
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						      < <td class="product-remove"><a href="{% url 'cart_shop:del_from_wishlist' item.id %}"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-1.jpg' %});"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url({{item.product.image.url}});"></div></td>
 						        
 						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
+						        	<h3>{{item.product.name}}</h3>
+						        	<p>{{item.product.description}}</p>
 						        </td>
 						        
-						        <td class="price">$4.90</td>
+						        <td class="price">${{item.product.price}}</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<input type="text" name="quantity" class="quantity form-control input-number" value={{item.quantity}} value="1" min="1" max="100">
 					          	</div>
 					          </td>
 						        
-						        <td class="total">$4.90</td>
+						        <td class="total">${% widthratio item.product.price 1 item.quantity %}</td>
 						      </tr><!-- END TR-->
-
+							{%endfor%}
+							<!-- ЗАГЛУШКА
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
+
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-2.jpg' %});"></div></td>
-						        
+
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
 						        	<p>Far far away, behind the word mountains, far from the countries</p>
 						        </td>
-						        
+
 						        <td class="price">$15.70</td>
-						        
+
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
 					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
-						        
+
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR
 
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
+
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-3.jpg' %});"></div></td>
-						        
+
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
 						        	<p>Far far away, behind the word mountains, far from the countries</p>
 						        </td>
-						        
+
 						        <td class="price">$15.70</td>
-						        
+
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
 					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
-						        
+
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR
 
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
+
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-4.jpg' %});"></div></td>
-						        
+
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
 						        	<p>Far far away, behind the word mountains, far from the countries</p>
 						        </td>
-						        
+
 						        <td class="price">$15.70</td>
-						        
+
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
 					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
-						        
+
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR
 
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
+
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-5.jpg' %});"></div></td>
-						        
+
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
 						        	<p>Far far away, behind the word mountains, far from the countries</p>
 						        </td>
-						        
+
 						        <td class="price">$15.70</td>
-						        
+
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
 					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
-						        
+
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR
 
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
+
 						        <td class="image-prod"><div class="img" style="background-image:url({% static 'shop/images/product-6.jpg' %});"></div></td>
-						        
+
 						        <td class="product-name">
 						        	<h3>Bell Pepper</h3>
 						        	<p>Far far away, behind the word mountains, far from the countries</p>
 						        </td>
-						        
+
 						        <td class="price">$15.70</td>
-						        
+
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
 					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
-						        
+
 						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+						      </tr><!-- END TR--> <!-- Повторяющийся блог -->
 						    </tbody>
 						  </table>
 					  </div>
@@ -243,6 +251,8 @@
 			</div>
 		</section>
 
+{% endblock %}
+<!--
 		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
@@ -328,7 +338,7 @@
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 						</p>
           </div>
         </div>
@@ -337,7 +347,7 @@
 
 
 
-  <!-- loader -->
+  <!-- loader
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
