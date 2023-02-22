@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from .models import CartItemShop, Cart, Product, Wishlist
 from django.shortcuts import render, get_object_or_404, redirect
+from decimal import Decimal
 
 
 class ViewCart(View):
@@ -11,13 +12,17 @@ class ViewCart(View):
            data = list(cart_items)
            total_price_no_discount = sum(item.product.price * item.quantity
                                          for item in data)
+           if not total_price_no_discount: #ПРИВЕДЕНИЕ К ОДНОМУ ТИПУ ДАННЫХ
+               total_price_no_discount = Decimal("0.00")
            total_discount = sum(item.product.price * item.product.discount * item.quantity
                                 for item in data if item.product.discount is not None)/100
-          # total_sum = total_price_no_discount - total_discount #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
+           if not total_discount: #ПРИВЕДЕНИЕ К ОДНОМУ ТИПУ ДАННЫХ
+               total_discount = Decimal("0.00")
+           total_sum = total_price_no_discount - total_discount #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
            context = {'cart_items': data,
                       'total_price_no_discount': total_price_no_discount,
                       'total_discount': total_discount,
-                      #'total_sum': total_sum, #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
+                      'total_sum': total_sum, #РАСЧЕТ СКИДКИ 'decimal.Decimal' and 'float'
                       }
            return render(request, 'cart_shop/cart.html', context)
        return redirect('auth_shop:login')
